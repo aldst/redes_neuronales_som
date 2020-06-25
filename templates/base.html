@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'css/stilos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/hint.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Bootstrap-4-4.1.1/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fontawesome-free/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'jQuery-3.3.1/jquery.mCustomScrollbar.min.css' %}">
+    <link href="{% static 'jquery-confirm/jquery-confirm.min.css' %}" rel="stylesheet">
+
+    <!--Datatables-->
+    <link rel="stylesheet" href="{% static 'datatables-1.10.20/css/dataTables.bootstrap4.css' %}" />
+    <link rel="stylesheet"
+        href="{% static 'datatables-1.10.20/plugins/responsive-2.2.3/css/responsive.bootstrap4.css' %}" />
+
+    {% block fixed_datatable %}
+    <!--<link rel="stylesheet" href="{% static 'css/fixedHeader.dataTables.min.css' %}">-->
+    {% endblock fixed_datatable %}
+
+    <link rel="stylesheet" href="{% static 'css/estilos_body.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/btn.css' %}">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css"
+        integrity="sha256-DOS9W6NR+NFe1fUhEE0PGKY/fubbUCnOfTje2JMDw3Y=" crossorigin="anonymous" />
+
+    {% block css %}
+
+    {% endblock css %}
+</head>
+
+<body>
+    <!--CONTENEDOR PADRE-->
+    <div class="page-wrapper chiller-theme toggled">
+
+        <main class="page-content">
+            <div class="container-fluid pt-0">
+
+                <!--nav_bar-->
+                <nav class="navbar navbar-expand-md">
+                    <div class="container-fluid">
+                        <a class="navbar-brand text-white pb-0 pt-2" href="#">
+                            <span class="text-uppercase text-monospace">
+                                <h4>{% block subtitle %}
+                                    {% endblock subtitle %}
+                                </h4>
+                            </span>
+                        </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nvbCollapse"
+                            aria-controls="nvbCollapse">
+                            <span class="fas fa-bars"></span>
+                        </button>
+
+                    </div>
+                </nav>
+                <!--/..-->
+
+                <!--Principal-->
+                <div class="row">
+                    <div class="form-group col-10">
+                        {% block content %}
+
+                        {% endblock content %}
+                    </div>
+                </div>
+                <!--/..-->
+                <div class="modal fade" id="popup">
+
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script src="{% static 'jQuery-3.3.1/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'Bootstrap-4-4.1.1/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'jQuery-3.3.1/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+
+    <script src="{% static 'datatables-1.10.20/js/jquery.dataTables.js' %}"></script>
+    <script src="{% static 'datatables-1.10.20/js/dataTables.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'datatables-1.10.20/plugins/responsive-2.2.3/js/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'datatables-1.10.20/plugins/responsive-2.2.3/js/responsive.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'sweetalert2-9.10.0/sweetalert2.all.min.js' %}"></script>
+    <script src="{% static 'jquery-confirm/jquery-confirm.min.js' %}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"
+        integrity="sha256-FEqEelWI3WouFOo2VWP/uJfs1y8KJ++FLh2Lbqc8SJk=" crossorigin="anonymous"></script>
+
+
+    <script>
+        $(document).ready(function () {
+            jQuery.datetimepicker.setLocale('es');
+        });
+    </script>
+
+    {% block control_modal %}
+
+    <script>
+        function abrir_modal(url) {
+            $("#popup").load(url, function () {
+                $(this).modal({
+                    backdrop: 'static',
+                    keyboard: false
+                })
+                $(this).modal('show');
+            });
+            return false;
+        }
+
+        function cerrar_modal() {
+            $('#popup').modal('hide');
+            return false;
+        }
+
+        function mensaje(msg, color = 'green') {
+            $.alert({
+                title: '',
+                icon: 'fas fa-check',
+                theme: 'modern',
+                animation: 'zoom',
+                type: color,
+                content: msg
+            });
+        }
+
+        // Para los mensajes de vistas en funciones o clases
+        {% if messages %}
+        {% for message in messages %}
+        console.log("{{message.tags}}");
+        mensaje('{{message}}');
+        {% endfor %}
+        {% endif %}
+
+
+        {% if form.errors %}
+            var errors = '';
+            {% for field in form  %}
+                {% for error in field.errors  %}
+                    errors += '{{ error }}\n';
+                {% endfor %}
+            {% endfor %}
+            Swal.fire({
+                title: 'Ocurrió un error al ingresar los datos!',
+                text: errors,
+                icon: 'error',
+                confirmButtonText: 'Ok'
+            })
+
+        {% endif %}
+
+    </script>
+
+    {% endblock control_modal %}
+
+    {% block js %}
+    <!--<script src="{% static 'js/funciones.js' %}"></script>-->
+    {% endblock js %}
+
+</body>
+
+</html>

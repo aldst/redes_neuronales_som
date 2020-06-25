@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Diagnosticar anemia | SOM{% endblock title %}
+
+{% block subtitle %}
+<i class="fas fa-hospital-user"></i><strong>Paciente</strong> <i class="fas fa-angle-double-right"></i>
+<strong>Diagnosticar anemia</strong>
+{% endblock subtitle %}
+
+{% block content %}
+
+<div class="card my-5">
+  <div class="card-header">
+
+    <span class="float-md-left text-black text-uppercase mt-2"><i class="fas fa-list"></i> <strong><mark> Listado de
+        Pacientes registrados</mark></strong></span>
+
+
+      <a href="#" onclick="return abrir_modal('{% url 'som:register_patient' %}')" class="btn btn-success float-right">
+          <i class="far fa-plus-square mr-1"></i> <strong>Nuevo Paciente</strong></a>
+
+  </div>
+  <div class="card-body">
+    <div class="row d-flex justify-content-center">
+      <div class="col-8">
+        <!--<hr class="my-3">-->
+        <div class="table-responsive">
+          <table id="example" class="table table-bordered table-hover text-center">
+            <thead class="text-center text-white" style="background: #284b63">
+              <tr>
+                <th colspan="5" >Pacientes</th>
+              </tr>
+              <tr>
+                <th>Edad</th>
+                <th>IMC</th>
+                <th>Hemoglobina</th>
+                <th>Hemoglobina ajustada por altitud</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for paciente in object_list %}
+              <tr>
+                <td>{{paciente.edad}}</td>
+                <td>{{paciente.imc}}</td>
+                <td>{{paciente.hemog}}</td>
+                <td>{{paciente.hemog_ajustada}}</td>
+                <td>
+                      <a href="#" class="btn btn-warning mr-2" onclick="return abrir_modal('{% url 'som:edit_patient' paciente.id %}')"><i class="fas fa-edit"></i></a>
+                      <a href="#" onclick="" class="btn btn-info align-content-center"><i class="far fa-plus-square mr-2"></i><strong>Diagnosticar</strong></a>
+                  </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock content %}
+
+{% block js %}
+<script src="{% static 'js/table.js' %}"></script>
+
+<script>
+  $.extend(true, $.fn.dataTable.defaults, {
+    searching: true,
+    ordering: false,
+  });
+</script>
+{% endblock js %}
