@@ -1,0 +1,43 @@
+<div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+      <div class="row p-2">
+        <div class="col">
+          <div class="card shadow">
+
+            {% if object %}
+            <div class="card-header bg-warning p-1">
+              {% else %}
+              <div class="card-header bg-success p-1">
+                {% endif %}
+              </div>
+              <div class="card-body">
+                <form method="POST" action="{% url 'som:edit_patient' object.pk %}">
+                  {% csrf_token %}
+                  <div class=" row">
+                    <div class="col-12">
+                      <form method="POST" action="{% url 'som:register_patient' %}">
+                        {% csrf_token %}
+                        <div>
+                            <img src="" width="600px" />
+                        </div>
+                        <div class=" row">
+                            <div class="col-2">
+                                <br>
+                              <button type="submit" class="btn btn-info"><strong><i class="fas fa-save"></i>
+                                  Guardar</strong></button>
+                            </div>
+                            <div class="col-2">
+                                <br>
+                              <button type="submit" class="btn btn-danger" onclick="return cerrar_modal()"><strong><i
+                                    class="fas fa-window-close"></i>
+                                  Cancelar</strong></button>
+                            </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+              </div>
+            </div>
+
+          </div>
+        </div>

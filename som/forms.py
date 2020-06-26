@@ -5,13 +5,22 @@ from .models import *
 class PatientForm(forms.ModelForm):
     class Meta:
         model = Patient
-        fields = ['edad','imc','hemog','hemog_ajustada']
+        fields = '__all__'
 
         widget = {
-            'edad': forms.IntegerField(min_value=0),
-            'imc': forms.FloatField(min_value=12, max_value=100),
-            'hemog': forms.FloatField(min_value=4, max_value=21),
-            'hemog_ajustada': forms.FloatField(min_value=4, max_value=21)
+            'age': forms.IntegerField(min_value=0),
+            'sex': forms.IntegerField(),
+            'cp': forms.IntegerField(),
+            'trestbps': forms.IntegerField(),
+            'chol': forms.IntegerField(),
+            'fbs': forms.IntegerField(),
+            'restecg': forms.IntegerField(),
+            'thalach': forms.IntegerField(),
+            'exang': forms.IntegerField(),
+            'oldpeak': forms.IntegerField(),
+            'slope': forms.IntegerField(),
+            'ca': forms.IntegerField(),
+            'thal': forms.IntegerField()
         }
 
     def __init__(self, *args, **kwargs):

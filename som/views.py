@@ -5,7 +5,6 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views.generic import UpdateView, DeleteView, ListView, CreateView
 
-
 # Create your views here.
 
 
@@ -28,3 +27,8 @@ class EditPatient(SuccessMessageMixin, UpdateView):
     form_class = PatientForm
     success_url = reverse_lazy('som:list_patient')
     success_message = "Paciente editado satisfactoriamente"
+
+
+class DiagnosticPatient(SuccessMessageMixin, UpdateView):
+    model = Patient
+    template_name = 'som/patient_diagnostic.html'

@@ -4,7 +4,8 @@ from .models import *
 
 class PatientAdmin(admin.ModelAdmin):
     list_display = (
-        'edad','imc','hemog','hemog_ajustada',
+        'age','sex','cp','trestbps','chol','fbs','restecg',
+        'thalach','exang','oldpeak','slope','ca','thal',
     )
 
     ordering = ('id',)

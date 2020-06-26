@@ -13,44 +13,58 @@
 
 <div class="card my-5">
   <div class="card-header">
-
     <span class="float-md-left text-black text-uppercase mt-2"><i class="fas fa-list"></i> <strong><mark> Listado de
         Pacientes registrados</mark></strong></span>
 
-
       <a href="#" onclick="return abrir_modal('{% url 'som:register_patient' %}')" class="btn btn-success float-right">
           <i class="far fa-plus-square mr-1"></i> <strong>Nuevo Paciente</strong></a>
-
   </div>
   <div class="card-body">
     <div class="row d-flex justify-content-center">
-      <div class="col-8">
+      <div class="col-12">
         <!--<hr class="my-3">-->
         <div class="table-responsive">
           <table id="example" class="table table-bordered table-hover text-center">
             <thead class="text-center text-white" style="background: #284b63">
               <tr>
-                <th colspan="5" >Pacientes</th>
-              </tr>
-              <tr>
                 <th>Edad</th>
-                <th>IMC</th>
-                <th>Hemoglobina</th>
-                <th>Hemoglobina ajustada por altitud</th>
-                <th>Acciones</th>
+                <th>Sexo</th>
+                <th>Dolor de pecho</th>
+                <th>Presión de sangre</th>
+                <th>Colesterol</th>
+                <th>Nivel de azúcar en ayuno</th>
+                <th>Resultadps electrocardiográficos en reposo</th>
+                <th>Nivel máximo de frecuencia cardiaca</th>
+                <th>Angila inducida por ejercicio</th>
+                <th>Depresión ST inducida</th>
+                <th>Pico más alto</th>
+                <th>Núm. vasos principales</th>
+                <th>thal</th>
+                <th colspan="2">Acciones</th>
               </tr>
             </thead>
             <tbody>
               {% for paciente in object_list %}
               <tr>
-                <td>{{paciente.edad}}</td>
-                <td>{{paciente.imc}}</td>
-                <td>{{paciente.hemog}}</td>
-                <td>{{paciente.hemog_ajustada}}</td>
+                <td>{{paciente.age}}</td>
+                <td>{{paciente.get_sex_display}}</td>
+                <td>{{paciente.get_cp_display}}</td>
+                <td>{{paciente.trestbps}}</td>
+                <td>{{paciente.chol}}</td>
+                <td>{{paciente.get_fbs_display}}</td>
+                <td>{{paciente.get_restecg_display}}</td>
+                <td>{{paciente.thalach}}</td>
+                <td >{{paciente.get_exang_display}}</td>
+                <td>{{paciente.oldpeak}}</td>
+                <td>{{paciente.get_slope_display}}</td>
+                <td>{{paciente.get_ca_display}}</td>
+                <td>{{paciente.get_thal_display}}</td>
                 <td>
-                      <a href="#" class="btn btn-warning mr-2" onclick="return abrir_modal('{% url 'som:edit_patient' paciente.id %}')"><i class="fas fa-edit"></i></a>
-                      <a href="#" onclick="" class="btn btn-info align-content-center"><i class="far fa-plus-square mr-2"></i><strong>Diagnosticar</strong></a>
-                  </td>
+                  <a href="#" class="btn btn-warning mr-2" onclick="return abrir_modal('{% url 'som:edit_patient' paciente.id %}')"><i class="fas fa-edit"></i><strong>Editar</strong></a>
+                </td>
+                <td>
+                  <a href="#" onclick="return abrir_modal('{% url 'som:diagnostic_patient' paciente.id %}')" class="btn btn-info align-content-center"><i class="far fa-plus-square mr-2"></i><strong>Diagnosticar</strong></a>
+                </td>
               </tr>
               {% endfor %}
             </tbody>
@@ -59,6 +73,17 @@
       </div>
     </div>
   </div>
+    <hr class="my-3">
+    <br>
+    <div class="d-flex justify-content-center">
+
+        <div class="row">
+            <hr class="mx-5">
+            <img src="/static/image/dark.jpg" width="75%" />
+        </div>
+
+    </div>
+<hr class="my-3">
 </div>
 
 
