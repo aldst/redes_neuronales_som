@@ -189,8 +189,7 @@ def diagnostic(request, id):
         print(response)
     else:
         response = patient.result
-        print(response)
-    print(type(response))
+
     return render(request, 'som/patient_diagnostic.html',
                   {'response': response})
 

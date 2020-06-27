@@ -44,18 +44,18 @@ class Patient(models.Model):
         (3, 3)
     )
 
-    age = models.IntegerField("Edad")
+    age = models.PositiveSmallIntegerField("Edad")
     sex = models.IntegerField("Sexo",choices=CHOICE_SEX)
     cp = models.IntegerField("Dolor de pecho",choices=CHOICE_CP)
-    trestbps = models.IntegerField("Presión de sangre")
-    chol = models.FloatField("Colesterol")
+    trestbps = models.PositiveIntegerField("Presión de sangre")
+    chol = models.PositiveIntegerField("Colesterol")
 
     fbs = models.IntegerField("Nivel de azúcar en ayuno",choices=CHOICE_FBS)
     
     restecg = models.IntegerField("Res. electrocardiográficos",choices=CHOICE_RESTECG)
-    thalach = models.IntegerField("Nivel maximo de frecuencia cardiaca")
+    thalach = models.PositiveIntegerField("Nivel maximo de frecuencia cardiaca")
     exang = models.IntegerField("Angila inducida por ejercicio",choices=CHOICE_EXANG)
-    oldpeak = models.IntegerField("Depresión ST inducida")
+    oldpeak = models.PositiveIntegerField("Depresión ST inducida")
     slope = models.IntegerField("Pico más alto",choices=CHOICE_SLOPE)
     ca = models.IntegerField("Núm vasos principales",choices=CHOICE_CA)
     thal = models.IntegerField("thal",choices=CHOICE_THAL)
