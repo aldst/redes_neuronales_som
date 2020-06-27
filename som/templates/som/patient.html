@@ -40,7 +40,7 @@
                 <th>Pico más alto</th>
                 <th>Núm. vasos principales</th>
                 <th>thal</th>
-                <th colspan="2">Acciones</th>
+                <th>Nivel de obstrucción arterial</th>
               </tr>
             </thead>
             <tbody>
@@ -59,13 +59,24 @@
                 <td>{{paciente.get_slope_display}}</td>
                 <td>{{paciente.get_ca_display}}</td>
                 <td>{{paciente.get_thal_display}}</td>
-                <td>
-                  <a href="#" class="btn btn-warning mr-2" onclick="return '{% url 'som:edit_patient' paciente.id %}'"><i class="fas fa-edit"></i><strong>Editar</strong></a>
-                </td>
-                <td>
+                  {% if paciente.result is None %}
+                      <td>
                     <a href="{% url 'som:hallarPaciente' paciente.id %}" class="btn btn-success" ><strong><i
                                 class="fas fa-share-square"></i> Diagnosticar</strong></a>
-                </td>
+                    </td>
+                  {% else %}
+                      {% if paciente.result  ==  0 %}
+                          <td>40%</td>
+                      {% elif paciente.result == 1 %}
+                          <td>50%</td>
+                      {% elif paciente.result == 2 %}
+                          <td>65%</td>
+                      {% elif paciente.result == 3 %}
+                          <td>70%</td>
+                      {% elif paciente.result == 4 %}
+                          <td>75%</td>
+                      {% endif %}
+                  {% endif %}
               </tr>
               {% endfor %}
             </tbody>

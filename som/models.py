@@ -59,6 +59,7 @@ class Patient(models.Model):
     slope = models.IntegerField("Pico más alto",choices=CHOICE_SLOPE)
     ca = models.IntegerField("Núm vasos principales",choices=CHOICE_CA)
     thal = models.IntegerField("thal",choices=CHOICE_THAL)
+    result = models.IntegerField("Resultado", null=True, blank=True)
 
     class Meta:
         verbose_name = "Paciente"
@@ -66,4 +67,4 @@ class Patient(models.Model):
         db_table = "pacientes"
 
     def __str__(self):
-        return f"{self.age} - {self.sex} - {self.cp} - {self.trestbps} - {self.chol} - {self.fbs} - {self.restecg} - {self.thalach} - {self.exang} - {self.oldpeak} - {self.slope} - {self.ca} - {self.thal} "
+        return f"{self.age} - {self.sex} - {self.cp} - {self.trestbps} - {self.chol} - {self.fbs} - {self.restecg} - {self.thalach} - {self.exang} - {self.oldpeak} - {self.slope} - {self.ca} - {self.thal} - {self.result}"

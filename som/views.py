@@ -173,15 +173,24 @@ def execute(dato):
 
 def diagnostic(request, id):
     patient = Patient.objects.get(id=id)
-    data = [float(patient.age), float(patient.sex), float(patient.cp),
-            float(patient.trestbps), float(patient.chol),
-            float(patient.fbs), float(patient.restecg), float(patient.thalach),
-            float(patient.exang),
-            float(patient.oldpeak), float(patient.slope), float(patient.ca),
-            float(patient.thal)]
+    print(patient.result)
 
-    result = execute(data)
-    response = str(result)
-    print(response)
+    if patient.result is None:
+        data = [float(patient.age), float(patient.sex), float(patient.cp),
+                float(patient.trestbps), float(patient.chol),
+                float(patient.fbs), float(patient.restecg), float(patient.thalach),
+                float(patient.exang),
+                float(patient.oldpeak), float(patient.slope), float(patient.ca),
+                float(patient.thal)]
+        result = execute(data)
+        response = str(result)
+        patient.result = response
+        patient.save()
+        print(response)
+    else:
+        response = patient.result
+        print(response)
+    print(type(response))
+    return render(request, 'som/patient_diagnostic.html',
+                  {'response': response})
 
-    return render(request, 'som/patient_diagnostic.html', {'response': response})

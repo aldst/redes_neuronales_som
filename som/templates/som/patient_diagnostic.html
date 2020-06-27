@@ -17,15 +17,15 @@
                       <div class="col-12">
                         <h3>Probabilidad de sufrir una enfermedad del corazón </h3>
                           {% if response  == "0" %}
-                              <h5>El diagnostico es:  Nivel de obstrucción en la arteria al 40%</h5>
+                              <h5>El diagnostico es:  Nivel de obstrucción arterial al 40%</h5>
                           {% elif response == "1" %}
-                                <h5>El diagnostico es:  Nivel de obstrucción en la arteria al 50%</h5>
+                                <h5>El diagnostico es:  Nivel de obstrucción arterial al 50%</h5>
                           {% elif response == "2" %}
-                                <h5>El diagnostico es:  Nivel de obstrucción en la arteria al 65%</h5>
+                                <h5>El diagnostico es:  Nivel de obstrucción arterialal 65%</h5>
                           {% elif response == "3" %}
-                                <h5>El diagnostico es:  Nivel de obstrucción en la arteria al 70%</h5>
-                          {% else %}
-                              <h5>El diagnostico es:  Nivel de obstrucción en la arteria al 75%</h5>
+                                <h5>El diagnostico es:  Nivel de obstrucción arterial al 70%</h5>
+                          {% elif response == "4" %}
+                              <h5>El diagnostico es:  Nivel de obstrucción arterial al 75%</h5>
                           {% endif %}
                       </div>
                       <div class="d-flex justify-content-center">
