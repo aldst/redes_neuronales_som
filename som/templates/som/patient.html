@@ -60,10 +60,11 @@
                 <td>{{paciente.get_ca_display}}</td>
                 <td>{{paciente.get_thal_display}}</td>
                 <td>
-                  <a href="#" class="btn btn-warning mr-2" onclick="return abrir_modal('{% url 'som:edit_patient' paciente.id %}')"><i class="fas fa-edit"></i><strong>Editar</strong></a>
+                  <a href="#" class="btn btn-warning mr-2" onclick="return '{% url 'som:edit_patient' paciente.id %}'"><i class="fas fa-edit"></i><strong>Editar</strong></a>
                 </td>
                 <td>
-                  <a href="#" onclick="return abrir_modal('{% url 'som:diagnostic_patient' paciente.id %}')" class="btn btn-info align-content-center"><i class="far fa-plus-square mr-2"></i><strong>Diagnosticar</strong></a>
+                    <a href="{% url 'som:hallarPaciente' paciente.id %}" class="btn btn-success" ><strong><i
+                                class="fas fa-share-square"></i> Diagnosticar</strong></a>
                 </td>
               </tr>
               {% endfor %}
@@ -79,7 +80,7 @@
 
         <div class="row">
             <hr class="mx-5">
-            <img src="/static/image/dark.jpg" width="75%" />
+            <img src="/static/image/doctor.jpg" width="40%" />
         </div>
 
     </div>
